@@ -1,6 +1,6 @@
 use ifood;
 
-create table Usuário (
+create table Usuario (
 id integer not null auto_increment primary key,
 date_created datetime,
 status integer,
@@ -16,9 +16,9 @@ id integer not null auto_increment primary key,
 date_created datetime,
 status integer,
 nome varchar(30),
-descrição varchar(30),
+descricao varchar(30),
 telefone varchar(15),
-avaliação varchar(30),
+avaliacao varchar(30),
 cnpj varchar(15)
 );
 
@@ -27,7 +27,7 @@ id integer not null auto_increment primary key,
 date_created datetime,
 status integer,
 nome varchar(30),
-descrição varchar(30)
+descricao varchar(30)
 );
 
 create table Produto (
@@ -35,8 +35,8 @@ id integer not null auto_increment primary key,
 date_created datetime,
 status integer,
 nome varchar(30),
-preço varchar(5),
-descrição varchar(30)
+preco varchar(5),
+descricao varchar(30)
 );
 
 create table categoria_produto (
@@ -44,7 +44,7 @@ id integer not null auto_increment primary key,
 date_created datetime,
 status integer,
 nome varchar(30),
-descrição varchar(30)
+descricao varchar(30)
 );
 
 create table prod_add (
@@ -66,7 +66,7 @@ status integer,
 quantidade varchar(100)
 );
 
-create table Endereço (
+create table Endereco (
 id integer not null auto_increment primary key,
 date_created datetime,
 status integer,
@@ -74,7 +74,7 @@ rua varchar(100),
 bairro varchar(30),
 cidade varchar(30),
 cep varchar(10),
-número varchar(4),
+numero varchar(4),
 complemento varchar(12)
 );
 
@@ -84,7 +84,7 @@ date_created datetime,
 status integer,
 taxa_entrega float,
 valor_total varchar(10),
-descrição varchar(30)
+descricao varchar(30)
 );
 
 create table hist_pedido (
@@ -93,13 +93,13 @@ date_created datetime,
 status integer
 );
 
-create table Avaliação (
+create table Avaliacao (
 id integer not null auto_increment primary key,
 date_created datetime,
 status integer,
 restaurante_nota varchar(5),
 pedido_nota varchar(5),
-descrição varchar(30)
+descricao varchar(30)
 );
 
 create table Adicional (
@@ -108,7 +108,7 @@ date_created datetime,
 status integer,
 nome varchar(20),
 valor varchar(10),
-descrição varchar(30)
+descricao varchar(30)
 );
 
 create table status_pedido (
@@ -116,7 +116,7 @@ id integer not null auto_increment primary key,
 date_created datetime,
 status integer,
 nome varchar(20),
-descrição varchar(30)
+descricao varchar(30)
 );
 
 create table Pagamento (
@@ -132,24 +132,24 @@ id integer not null auto_increment primary key,
 date_created datetime,
 status integer,
 nome varchar(20),
-descrição varchar(30)
+descricao varchar(30)
 );
 
-create table método_pagamento (
+create table metodo_pagamento (
 id integer not null auto_increment primary key,
 date_created datetime,
 status integer,
 nome varchar(20),
-descrição varchar(30)
+descricao varchar(30)
 );
 
 create table cupom (
 id integer not null auto_increment primary key,
 date_created datetime,
 status integer,
-código varchar(10),
+codigo varchar(10),
 valor varchar(10),
-descrição varchar(30),
+descricao varchar(30),
 validade datetime
 );
 
@@ -159,4 +159,10 @@ date_created datetime,
 status integer,
 hora_abrir time,
 hora_fechar time
+);
+
+create table favoritos (
+id integer not null auto_increment primary key,
+date_created datetime,
+status integer
 );
