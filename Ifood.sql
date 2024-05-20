@@ -47,19 +47,19 @@ nome varchar(30),
 descricao varchar(30)
 );
 
-create table prod_add (
+create table produto_adicional (
 ID integer not null auto_increment primary key,
 date_created datetime,
 status integer
 );
 
-create table pedid_prod (
+create table pedido_produto (
 ID integer not null auto_increment primary key,
 date_created datetime,
 status integer
 );
 
-create table add_prod_pedid (
+create table adicional_produdo_pedido (
 ID integer not null auto_increment primary key,
 date_created datetime,
 status integer,
@@ -87,7 +87,7 @@ valor_total varchar(10),
 descricao varchar(30)
 );
 
-create table hist_pedido (
+create table historico_pedido (
 ID integer not null auto_increment primary key,
 date_created datetime,
 status integer
@@ -213,10 +213,10 @@ ADD CONSTRAINT status_pedido_FK
 FOREIGN KEY(ID_status_pedido) references status_pedido(ID_status_pedido);
 
 /*Tabela Adicionar Produto*/
-ALTER TABLE prod_add
+ALTER TABLE produto_adicional
 ADD CONSTRAINT Produto_FK
 FOREIGN KEY(ID-Produto) references Produto(ID_Produto);
-ALTER TABLE prod_add
+ALTER TABLE produto_adicional
 ADD CONSTRAINT Pedido_FK
 FOREIGN KEY(ID_Pedido) references Pedido(ID_Pedido);
 
@@ -229,26 +229,26 @@ ADD CONSTRAINT Restaurante_FK
 FOREIGN KEY(ID_Restaurante) references Restaurante(ID_Restaurante);
 
 /*Tabela Pedido_Produto*/
-ALTER TABLE pedid_prod
+ALTER TABLE pedidp_produto
 ADD CONSTRAINT Pedido_FK
 FOREIGN KEY(ID_Pedido) references (ID_Pedido);
-ALTER TABLE pedid_prod
+ALTER TABLE pedido_produto
 ADD CONSTRAINT Produto_FK
 FOREIGN KEY(ID_Produto) references Produto(ID_Produto);
 
 /*Tabela Adicional_Produto_Pedido*/
-ALTER TABLE add_prod_pedid
-ADD CONSTRAINT pedid_prod_FK
-FOREIGN KEY(ID_pedid_prod) references pedid_prod(ID_pedid_prod);
-ALTER TABLE add_prod_pedid
+ALTER TABLE adicional_produto_pedido
+ADD CONSTRAINT pedido_produto_FK
+FOREIGN KEY(ID_pedido_produto) references pedido_produto(ID_pedido_produto);
+ALTER TABLE adicional_produto_pedido
 ADD CONSTRAINT Adicional_FK
 FOREIGN KEY(ID_Adicional) references Adicional(ID_Adicional);
 
 /* Tabela Histórico Pedido*/
-ALTER TABLE hist_pedido
+ALTER TABLE historico_pedido
 ADD CONSTRAINT Pedido_FK
 FOREIGN KEY(ID_Pedido) references Pedido(ID_Pedido);
-ALTER TABLE hist_pedido
+ALTER TABLE historico_pedido
 ADD CONSTRAINT status_pedido_FK
 FOREIGN KEY(ID_status_pedido) references status_pedido(ID_status_pedido);
 
@@ -291,9 +291,9 @@ INSERT INTO Endereco(date_created, status, rua, bairro, cidade, cep, numero, com
 
 /* Inserts Tabela Produto */
 INSERT INTO Produto(date_created, status, nome, preco, descricao) VALUES
-(NOW(), 1, "Pizza de Frango", "20R$", "Recheio de Frango e quiejo Mussarela"),
-(NOW(), 1, "Churrasco Misto", "50R$", "combom: picanha, frango, linguiça e carne de porco"),
-(NOW(), 1, "Sushi", "35R$", "Combo de Sushi completo");
+(NOW(), 1, "Pizza de Frango", 20, "Recheio de Frango e quiejo Mussarela"),
+(NOW(), 1, "Churrasco Misto", 50, "combom: picanha, frango, linguiça e carne de porco"),
+(NOW(), 1, "Sushi", 35, "Combo de Sushi completo");
 
 /* Inserts Tabela categoria_produto */
 INSERT INTO categoria_produto(date_created, status, nome, descricao) VALUES
@@ -303,18 +303,52 @@ INSERT INTO categoria_produto(date_created, status, nome, descricao) VALUES
 
 /* Inserts Tabela Adicional */
 INSERT INTO Adicional(date_created, status, nome, valor, descricao) VALUES
-(NOW(), 1, "Queijo Chedeer", "5R$", "Adicional de Queijo Chedeer na sua pizza"),
-(NOW(), 1, "Bacon", "15R$", "Adicional de Bacon no seu prato"),
-(NOW(), 1, "Molho Especial", "5R$", "Molho Especial para deixar seu prato mais saboroso");
+(NOW(), 1, "Queijo Chedeer", 5, "Adicional de Queijo Chedeer na sua pizza"),
+(NOW(), 1, "Bacon", 15, "Adicional de Bacon no seu prato"),
+(NOW(), 1, "Molho Especial", 5, "Molho Especial para deixar seu prato mais saboroso");
 
 /* Inserts Tabela Pedido */
 INSERT INTO Pedido(date_created, status, taxa_entrega, valor_total, descricao) VALUES
-(NOW(), 1, "5R$", "30R$", "Pedido para entrega em casa"),
-(NOW(), 1, "5R$", "70R$", "Pedido para retirada no restaurante"),
-(NOW(), 1, "5R$", "45R$", "Pedido para entrega na faculdade");
+(NOW(), 1, 5, 30, "Pedido para entrega em casa"),
+(NOW(), 1, 5, 70, "Pedido para retirada no restaurante"),
+(NOW(), 1, 5, 45, "Pedido para entrega na faculdade");
 
 /* Inserts Tabela status_pedido */
 INSERT INTO status_pedido(date_created, status, nome, descricao) VALUES
 (NOW(), 1, "Em Processamento", "Pedido está em processo para entrega"),
 (NOW(), 1, "Pronto para entrega", "Pedido está pronto para ser entregue ao cliente"),
 (NOW(), 1, "Pedido Entregue", "Pedido foi entregue ao cliente com sucesso");
+
+/* Inserts Tabela histórico_pedido */
+INSERT INTO historico_pedido(date_created, status, ID_Pedido, ID_status_pedido) VALUES
+(NOW(), 1, 1, 1),
+(NOW(), 1, 2, 2),
+(NOW(), 1, 3, 3);
+
+/* Inserts Tabela Cupom */
+INSERT INTO cupom(date_created, status, codigo, valor, descricao, validade) VALUES
+(NOW(), 1, "Desconto10%", 10, "Você terá um Desconto de 10% em seu próximo pedido"),
+(NOW(), 1, "Desconto20%", 20, "Vpcê terá um Desconto de 20% em seu próximo pedido"),
+(NOW(), 1, "Desconto30%", 30, "Você terá um Desconto de 30% em seu próximo pedido");
+
+/* Inserts Tabela adicional_produto_pedido */
+INSERT INTO adicional_produto_pedido(date_created, status, quantidade, ID_Adicional, ID_Produto) VALUES
+(NOW(), 1, 1, 1, 1),
+(NOW(), 1, 2, 2, 2),
+(NOW(), 1, 3, 3, 3);
+
+/* Inserts Tabela Avaliação */
+INSERT INTO Avaliacao(date_created, status, restaurante_nota, pedido_nota, descricao) VALUES
+(NOW(), 1, 5, 4, "Excelente atendimento e comida deliciosa!"),
+(NOW(), 1, 4, 2, "Comida muito boa, mas a entrega deixou um pouco a desejar!"),
+(NOW(), 1, 4, 4, "Comida deliciosa e atendimento muito bom!");
+
+/* Inserts Tabela Pagamento */
+INSERT INTO Pagamento(date_created, status, valor, data_hora) VALUES
+(NOW(), 1, 30, "20/05/2024 14:00"),
+(NOW(), 1, 70, "20/05/2024 13:20"),
+(NOW(), 1, 45, "20/05/2024 19:30);
+
+
+  
+  
