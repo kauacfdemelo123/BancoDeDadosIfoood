@@ -265,21 +265,56 @@ FOREIGN KEY(ID_status_pagamento) references status_pagamento(ID_status_pagamento
 
 /* Agora vou inserir os dados em cada tabela*/
 
-/* Inserts Tabela Usuario*/
+/* Inserts Tabela Usuario */
 INSERT INTO Usuario(date_created, status, nome, email, senha, telefone, cpf) VALUES
 (NOW(), 1, "Kauã", "kauademelo@hotmail.com", "afgb", "(87)94002-8922", "435.876.934-01"),
 (NOW(), 1, "Rui", "ruijose@hotmail.com", "acbd", "(87)97689-6543", "365.895.472-01"),
 (NOW(), 1, "Carlos", "carlosedu@hotmail.com", "badc", "(87)99132-3420", "132.481.973-01");
 
-/* Inserts Tabela Restaurante*/
+/* Inserts Tabela Restaurante */
 INSERT INTO Restaurante(date_created, status, nome, descricao, telefone, avaliacao, cnpj) VALUES
 (NOW(), 1, "Nobres House", "Nobres House serve as melhores Pizzas da região", "(87)99346-5402", 5.0, "12347658975432"),
 (NOW(), 1, "Churrascaria boi na brasa", "Churrascaria boi na brasa serve os melhores churrascos da cidade", "(87)99234-3120", 4.0, "67894523467581"),
 (NOW(), 1, "Restaurante Okomi", "Restaurante Okomi serve as melhores comidas Japonesas da região", "(87)99131-3221", 4.5, "96785432167231");
 
-/* Inserts Tabela categoria_estabelecimento*/
+/* Inserts Tabela categoria_estabelecimento */
 INSERT INTO categoria_estabelecimento(date_created, status , nome, descricao) VALUES
 (NOW(), 1, "Pizzaria",  "Restaurante especializado em Pizzas de qualidade!"),
 (NOW(), 1, "Churrascaria", "Restaurante especializado em churrascos de qualidade!"),
 (NOW(), 1, "Japonês", "Restaurante especializado em comidas japonesas!");
 
+/* Inserts Tabela Endereço */
+INSERT INTO Endereco(date_created, status, rua, bairro, cidade, cep, numero, complemento, padrao) VALUES
+(NOW(), 1, "Rua Avenida Capitão Justino Alves", "Bairro A", "Venturosa", "34567-987", "104", "Próximo ao shopping", 1),
+(NOW(), 1, "Rua Avenida Paulita", "Bairro B", "Recife", "78905-321", "108", "Próximo à praia", 0),
+(Now(), 1, "Rua Avenida Brasil", "Bairro C", "Arcoverde", "45678-354", "71", "Próximo da Loja Americanas", 0);
+
+/* Inserts Tabela Produto */
+INSERT INTO Produto(date_created, status, nome, preco, descricao) VALUES
+(NOW(), 1, "Pizza de Frango", "20R$", "Recheio de Frango e quiejo Mussarela"),
+(NOW(), 1, "Churrasco Misto", "50R$", "combom: picanha, frango, linguiça e carne de porco"),
+(NOW(), 1, "Sushi", "35R$", "Combo de Sushi completo");
+
+/* Inserts Tabela categoria_produto */
+INSERT INTO categoria_produto(date_created, status, nome, descricao) VALUES
+(NOW(), 1, "Pizza", "Variedades de Pizzas"),
+(NOW(), 1, "Churrasco", "Carnes na Brasa"),
+(NOW(), 1, "Sushi", "O melhor da culinária Japonesa");
+
+/* Inserts Tabela Adicional */
+INSERT INTO Adicional(date_created, status, nome, valor, descricao) VALUES
+(NOW(), 1, "Queijo Chedeer", "5R$", "Adicional de Queijo Chedeer na sua pizza"),
+(NOW(), 1, "Bacon", "15R$", "Adicional de Bacon no seu prato"),
+(NOW(), 1, "Molho Especial", "5R$", "Molho Especial para deixar seu prato mais saboroso");
+
+/* Inserts Tabela Pedido */
+INSERT INTO Pedido(date_created, status, taxa_entrega, valor_total, descricao) VALUES
+(NOW(), 1, "5R$", "30R$", "Pedido para entrega em casa"),
+(NOW(), 1, "5R$", "70R$", "Pedido para retirada no restaurante"),
+(NOW(), 1, "5R$", "45R$", "Pedido para entrega na faculdade");
+
+/* Inserts Tabela status_pedido */
+INSERT INTO status_pedido(date_created, status, nome, descricao) VALUES
+(NOW(), 1, "Em Processamento", "Pedido está em processo para entrega"),
+(NOW(), 1, "Pronto para entrega", "Pedido está pronto para ser entregue ao cliente"),
+(NOW(), 1, "Pedido Entregue", "Pedido foi entregue ao cliente com sucesso");
