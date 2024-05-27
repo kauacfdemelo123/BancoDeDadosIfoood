@@ -54,9 +54,8 @@ status integer
 );
 
 create table pedido_produto (
-ID integer not null auto_increment primary key,
-date_created datetime,
-status integer
+ID_Produto integer,
+ID_Adicional integer  
 );
 
 create table adicional_produdo_pedido (
@@ -153,18 +152,18 @@ descricao varchar(30),
 validade datetime NOT NULL
 );
 
-create table Funcionamento (
+create table funcionamento_restaurante (
 ID integer not null auto_increment primary key,
 date_created datetime,
 status integer,
+dia integer,  
 hora_abrir time,
 hora_fechar time
 );
 
 create table Favoritos (
-ID integer not null auto_increment primary key,
-date_created datetime,
-status integer
+ID_Usuario integer,
+ID_Restaurante integer
 );
 
 /*Nessa parte do código será feita as FK entre as tabelas */
@@ -236,7 +235,7 @@ ALTER TABLE pedido_produto
 ADD CONSTRAINT Produto_FK
 FOREIGN KEY(ID_Produto) references Produto(ID_Produto);
 
-/*Tabela Adicional_Produto_Pedido*/
+/*Tabela adicional_produto_pedido*/
 ALTER TABLE adicional_produto_pedido
 ADD CONSTRAINT pedido_produto_FK
 FOREIGN KEY(ID_pedido_produto) references pedido_produto(ID_pedido_produto);
@@ -257,7 +256,7 @@ ALTER TABLE Pagamento
 ADD CONSTRAINT Pedido_FK
 FOREIGN KEY(ID_Pedido) references Pedido(ID_Pedido);
 ALTER TABLE Pagamento
-ADD CONSTRAINT metodo_pagameento_FK
+ADD CONSTRAINT metodo_pagamento_FK
 FOREIGN KEY(ID_metodo_pagamento) references metodo_pagamento(ID_metodo_pagamento);
 ALTER TABLE Pagamento
 ADD CONSTRAINT status_pagamento_FK
@@ -347,7 +346,43 @@ INSERT INTO Avaliacao(date_created, status, restaurante_nota, pedido_nota, descr
 INSERT INTO Pagamento(date_created, status, valor, data_hora) VALUES
 (NOW(), 1, 30, "20/05/2024 14:00"),
 (NOW(), 1, 70, "20/05/2024 13:20"),
-(NOW(), 1, 45, "20/05/2024 19:30);
+(NOW(), 1, 45, "20/05/2024 19:30");
+
+/* Inserts Tabela método_pagamento */
+INSERT INTO metodo_pagamento(date_created, status, nome, descricao) VALUES
+(NOW(), 1, "Pix", "Pagamento via Pix"),
+(NOW(), 1, "Cartão de Crédito", "Pagamento via Cartão de Crédito"),
+(NOW(), 1, "Cartão de Débito", "Pagamento via Cartão de Débito");
+
+/* Inserts Tabela status_pagamento */
+INSERT INTO status_pagamento(date_created, status, nome, descricao) VALUES
+(NOW(), 1, "Pendente", "Pagamento ainda não realizado"),
+(NOW(), 1, "Concluído", "Pagamento concluído com sucesso"),
+(NOW(), 1, "Reembolsado", "Pagamento foi reembolsado ao cliente");
+
+/* Inserts Tabela Favoritos */
+INSERT INTO Favoritos(ID_Usuario, ID_Restaurante) VALUES
+(1, 1),
+(2, 2),
+(3, 3);
+
+/* Inserts Tabela pedido_produto */
+INSERT INTO pedido_produto(date_created, status, ID_Pedido, ID_Produto) VALUES
+(NOW(), 1, 1, 1),
+(NOW(), 1, 2, 2),
+(NOW(), 1, 3, 3);
+
+/* Inserts Tabela funcionamento_restaurante */
+INSERT INTO funcionamento_restaurante(date_created, status, dia, hora_abrir, hora_fechar) VALUES
+(NOW(), 1, 1, 08, 23),
+(NOW(), 1, 2, 09, 22),
+(NOW(), 1, 3, 10, 22);
+
+/* Inserts Tabela adiconar_produto */
+INSERT INTO produto_adiconal(ID_Adicional, ID_Produto) VALUES
+(1, 2),
+(1, 3),
+(1, 1);
 
 
   
